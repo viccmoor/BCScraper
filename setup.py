@@ -1,9 +1,9 @@
 """Set up module for BCScraper"""
 from setuptools import setup, find_packages
 
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 DESCRIPTION = "Un scraper para buscacursos.uc.cl."
-LONG_DESCRIPTION = "Un scraper para buscacursos.uc.cl sin usar proxies."
+LONG_DESCRIPTION = "Un scraper para buscacursos.uc.cl hecho en Python."
 
 setup(
     name="bcscraper",
