@@ -89,15 +89,18 @@ def buscar_por_nrc(periodo: str, nrc: str) -> Optional[Curso]:
 
 def buscar_curso(
     periodo: str, sigla: str = None,
-    nrc: str = None, nombre: str = None
+    nrc: str = None, nombre: str = None, profesor: str = None
 ) -> Optional[List[Curso]]:
-    """Busca un curso por sigla, NRC y nombre en un período específico."""
-    if not any((sigla, nrc, nombre)):
+    """
+    Busca un curso por sigla, NRC, nombre y profesor
+    en un período específico.
+    """
+    if not any((sigla, nrc, nombre, profesor)):
         return None
 
     return obtener_cursos(
         f"{URL}?cxml_semestre={periodo}&cxml_sigla={sigla}"
-        f"&cxml_nrc={nrc}&cxml_nombre={nombre}"
+        f"&cxml_nrc={nrc}&cxml_nombre={nombre}&cxml_profesor={profesor}"
     )
 
 
