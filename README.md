@@ -3,8 +3,6 @@
 **BCScraper** es un scraper ligero y fácil de usar que permite obtener información de cursos desde [buscacursos.uc.cl](https://buscacursos.uc.cl) sin necesidad de proxies.  
 Ideal para estudiantes, desarrolladores o cualquier persona que necesite automatizar la extracción de datos de los cursos UC.
 
----
-
 ## Características
 
 - Obtiene información completa de los cursos: NRC, sigla, nombre, profesor(es), campus, créditos, vacantes y horarios.
@@ -15,8 +13,6 @@ Ideal para estudiantes, desarrolladores o cualquier persona que necesite automat
   - NRC específico
 - Obtiene automáticamente los períodos disponibles.
 - No requiere proxies ni autenticación.
-
----
 
 ## Instalación
 
@@ -68,3 +64,7 @@ curso = buscar_por_nrc("2026-1", "12345")
 ```python
 curso = buscar_curso("2026-1", "MAT1610", "12345", "Cálculo I", "Nombre Apellido")
 ```
+
+## Licencia
+
+Este proyecto es de código abierto y está licenciado bajo la licencia MIT.
