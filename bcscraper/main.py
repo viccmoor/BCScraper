@@ -1,10 +1,12 @@
 """Módulo principal de BCScraper"""
+from typing import List, Optional
+
 from bs4 import BeautifulSoup
 from .classes import Curso, Modulo
 from .utils import fetch_html, URL
 
 
-def obtener_cursos(url: str):
+def obtener_cursos(url: str) -> List[Curso]:
     """Obtiene una lista de cursos desde una URL de Buscacursos."""
     html = fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
@@ -60,32 +62,46 @@ def obtener_cursos(url: str):
     return cursos
 
 
-def buscar_sigla(periodo: str, sigla: str):
+def buscar_por_sigla(periodo: str, sigla: str) -> List[Curso]:
     """Busca cursos por sigla en un período específico."""
     return obtener_cursos(f"{URL}?cxml_semestre={periodo}&cxml_sigla={sigla}")
 
 
-def buscar_profesor(periodo: str, profesor: str):
+def buscar_por_profesor(periodo: str, profesor: str) -> List[Curso]:
     """Busca cursos por profesor en un período específico."""
     return obtener_cursos(
         f"{URL}?cxml_semestre={periodo}&cxml_profesor={profesor}"
     )
 
 
-def buscar_curso(periodo: str, nombre: str):
+def buscar_por_nombre(periodo: str, nombre: str) -> List[Curso]:
     """Busca cursos por nombre en un período específico."""
     return obtener_cursos(
         f"{URL}?cxml_semestre={periodo}&cxml_nombre={nombre}"
     )
 
 
-def obtener_curso(periodo: str, nrc: str):
+def buscar_por_nrc(periodo: str, nrc: str) -> Optional[Curso]:
     """Obtiene un curso específico por su NRC en un período específico."""
     cursos = obtener_cursos(f"{URL}?cxml_semestre={periodo}&cxml_nrc={nrc}")
     return cursos[0] if cursos else None
 
 
-def obtener_periodos():
+def buscar_curso(
+    periodo: str, sigla: str = None,
+    nrc: str = None, nombre: str = None
+) -> Optional[List[Curso]]:
+    """Busca un curso por sigla, NRC y nombre en un período específico."""
+    if not any((sigla, nrc, nombre)):
+        return None
+
+    return obtener_cursos(
+        f"{URL}?cxml_semestre={periodo}&cxml_sigla={sigla}"
+        f"&cxml_nrc={nrc}&cxml_nombre={nombre}"
+    )
+
+
+def obtener_periodos() -> List[str]:
     """Obtiene la lista de períodos disponibles en Buscacursos."""
     html = fetch_html(URL)
     soup = BeautifulSoup(html, "html.parser")
