@@ -1,6 +1,6 @@
 # BCScraper
 
-**BCScraper** es un scraper ligero y fácil de usar que permite obtener información de cursos desde [buscacursos.uc.cl](https://buscacursos.uc.cl) sin necesidad de proxies.  
+**BCScraper** es un scraper ligero y fácil de usar que permite obtener información de cursos desde [buscacursos.uc.cl](https://buscacursos.uc.cl).  
 Ideal para estudiantes, desarrolladores o cualquier persona que necesite automatizar la extracción de datos de los cursos UC.
 
 ## Características
@@ -12,7 +12,6 @@ Ideal para estudiantes, desarrolladores o cualquier persona que necesite automat
   - Profesor
   - NRC específico
 - Obtiene automáticamente los períodos disponibles.
-- No requiere proxies ni autenticación.
 
 ## Instalación
 
@@ -28,6 +27,9 @@ py -3 -m pip install -U bcscraper
 ```
 
 ## Ejemplos rápidos
+
+> [!TIP]
+> Todas las funciones del módulo aceptan el parámetro opcional `proxy_url`. Esto permite redirigir las consultas a través de un servidor intermedio o un mirror de BuscaCursos en lugar de la URL oficial y evitar bloqueos.
 
 ### Obtener los períodos disponibles
 

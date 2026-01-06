@@ -62,34 +62,46 @@ def obtener_cursos(url: str) -> List[Curso]:
     return cursos
 
 
-def buscar_por_sigla(periodo: str, sigla: str) -> List[Curso]:
+def buscar_por_sigla(
+    periodo: str, sigla: str, proxy_url: str = None
+) -> List[Curso]:
     """Busca cursos por sigla en un período específico."""
-    return obtener_cursos(f"{URL}?cxml_semestre={periodo}&cxml_sigla={sigla}")
+    url = proxy_url if proxy_url else URL
+    return obtener_cursos(f"{url}?cxml_semestre={periodo}&cxml_sigla={sigla}")
 
 
-def buscar_por_profesor(periodo: str, profesor: str) -> List[Curso]:
+def buscar_por_profesor(
+    periodo: str, profesor: str, proxy_url: str = None
+) -> List[Curso]:
     """Busca cursos por profesor en un período específico."""
+    url = proxy_url if proxy_url else URL
     return obtener_cursos(
-        f"{URL}?cxml_semestre={periodo}&cxml_profesor={profesor}"
+        f"{url}?cxml_semestre={periodo}&cxml_profesor={profesor}"
     )
 
 
-def buscar_por_nombre(periodo: str, nombre: str) -> List[Curso]:
+def buscar_por_nombre(
+    periodo: str, nombre: str, proxy_url: str = None
+) -> List[Curso]:
     """Busca cursos por nombre en un período específico."""
+    url = proxy_url if proxy_url else URL
     return obtener_cursos(
-        f"{URL}?cxml_semestre={periodo}&cxml_nombre={nombre}"
+        f"{url}?cxml_semestre={periodo}&cxml_nombre={nombre}"
     )
 
 
-def buscar_por_nrc(periodo: str, nrc: str) -> Optional[Curso]:
+def buscar_por_nrc(
+    periodo: str, nrc: str, proxy_url: str = None
+) -> Optional[Curso]:
     """Obtiene un curso específico por su NRC en un período específico."""
-    cursos = obtener_cursos(f"{URL}?cxml_semestre={periodo}&cxml_nrc={nrc}")
+    url = proxy_url if proxy_url else URL
+    cursos = obtener_cursos(f"{url}?cxml_semestre={periodo}&cxml_nrc={nrc}")
     return cursos[0] if cursos else None
 
 
 def buscar_curso(
-    periodo: str, sigla: str = "",
-    nrc: str = "", nombre: str = "", profesor: str = ""
+    periodo: str, sigla: str = "", nrc: str = "",
+    nombre: str = "", profesor: str = "", proxy_url: str = None
 ) -> Optional[List[Curso]]:
     """
     Busca un curso por sigla, NRC, nombre y profesor
@@ -98,15 +110,17 @@ def buscar_curso(
     if not any((sigla, nrc, nombre, profesor)):
         return None
 
+    url = proxy_url if proxy_url else URL
     return obtener_cursos(
-        f"{URL}?cxml_semestre={periodo}&cxml_sigla={sigla}"
+        f"{url}?cxml_semestre={periodo}&cxml_sigla={sigla}"
         f"&cxml_nrc={nrc}&cxml_nombre={nombre}&cxml_profesor={profesor}"
     )
 
 
-def obtener_periodos() -> List[str]:
+def obtener_periodos(proxy_url: str = None) -> List[str]:
     """Obtiene la lista de períodos disponibles en Buscacursos."""
-    html = fetch_html(URL)
+    url = proxy_url if proxy_url else URL
+    html = fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
     options = soup.select('select[name="cxml_semestre"] option')
     periodos = [
