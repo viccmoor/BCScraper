@@ -88,8 +88,8 @@ def buscar_por_nrc(periodo: str, nrc: str) -> Optional[Curso]:
 
 
 def buscar_curso(
-    periodo: str, sigla: str = None,
-    nrc: str = None, nombre: str = None, profesor: str = None
+    periodo: str, sigla: str = "",
+    nrc: str = "", nombre: str = "", profesor: str = ""
 ) -> Optional[List[Curso]]:
     """
     Busca un curso por sigla, NRC, nombre y profesor
