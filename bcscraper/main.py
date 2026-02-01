@@ -100,12 +100,24 @@ def buscar_por_nrc(
 
 
 def buscar_curso(
-    periodo: str, sigla: str = "", nrc: str = "",
-    nombre: str = "", profesor: str = "", proxy_url: str = None
+    periodo: str,
+    sigla: str = "",
+    nrc: str = "",
+    nombre: str = "",
+    profesor: str = "",
+    campus: str = "",
+    formato: str = "",
+    categoria: str = "",
+    area_fg: str = "",
+    unidad_academica: str = "",
+    periodo_admision: str = "",
+    escuela: str = "",
+    nivel: str = "",
+    proxy_url: str = None
 ) -> Optional[List[Curso]]:
     """
-    Busca un curso por sigla, NRC, nombre y profesor
-    en un período específico.
+    Busca un curso en un período específico usando
+    múltiples filtros opcionales.
     """
     if not any((sigla, nrc, nombre, profesor)):
         return None
@@ -114,6 +126,11 @@ def buscar_curso(
     return obtener_cursos(
         f"{url}?cxml_semestre={periodo}&cxml_sigla={sigla}"
         f"&cxml_nrc={nrc}&cxml_nombre={nombre}&cxml_profesor={profesor}"
+        f"&cxml_campus={campus}&cxml_formato_cur={formato}"
+        f"&cxml_categoria={categoria}&cxml_area_fg={area_fg}"
+        f"&cxml_unidad_academica={unidad_academica}"
+        f"&cxml_periodo={periodo_admision}&cxml_escuela={escuela}"
+        f"&cxml_nivel={nivel}"
     )
 
 
